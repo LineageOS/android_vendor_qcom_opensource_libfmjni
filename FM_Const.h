@@ -115,14 +115,12 @@ typedef  unsigned int UINT;
 typedef  unsigned long ULINT;
 
 //STRING LITERALS
-const char *const FM_MODE_PROP = "vendor.hw.fm.mode";
-const char *const FM_VERSION_PROP = "vendor.hw.fm.version";
-const char *const FM_INIT_PROP = "vendor.hw.fm.init";
+const char *const FM_MODE_PROP = "hw.fm.mode";
+const char *const FM_VERSION_PROP = "hw.fm.version";
+const char *const FM_INIT_PROP = "hw.fm.init";
+const char *const FM_INIT_DL_PROP = "hw.fm.dl.init";
 const char *const FM_INTERNAL_ANTENNA_PROP = "vendor.hw.fm.internal_antenna";
-const char *const SCRIPT_START_PROP = "ctl.start";
-const char *const SCRIPT_STOP_PROP = "ctl.stop";
 const char *const CALIB_DATA_NAME = "/data/misc/fm/Riva_fm_cal";
-const char *const SOC_PATCH_DL_SCRPT = "vendor.fm";
 const char *const FM_DEVICE_PATH = "/dev/radio0";
 const char *const FM_PERFORMANCE_PARAMS = "/etc/fm/fm_srch_af_th.conf";
 

@@ -74,7 +74,7 @@ int FmIoctlsInterface :: start_fm_patch_dl
             if(ret != PROP_SET_SUCC)
                return FM_FAILURE;
 #ifndef QCOM_NO_FM_FIRMWARE
-            ret = property_set(SCRIPT_START_PROP, SOC_PATCH_DL_SCRPT);
+            ret = property_set(FM_INIT_DL_PROP, "1");
             if(ret != PROP_SET_SUCC)
                return FM_FAILURE;
             for(int i = 0; i < INIT_LOOP_CNT; i++) {
@@ -94,7 +94,7 @@ int FmIoctlsInterface :: start_fm_patch_dl
             init_success = 1;
 #endif
             if(!init_success) {
-                property_set(SCRIPT_STOP_PROP, SOC_PATCH_DL_SCRPT);
+                property_set(FM_INIT_DL_PROP, "0");
                 return FM_FAILURE;
             }else {
                 return FM_SUCCESS;
@@ -113,7 +113,7 @@ int  FmIoctlsInterface :: close_fm_patch_dl
 #ifndef QCOM_NO_FM_FIRMWARE
     int ret;
 
-    ret = property_set(SCRIPT_STOP_PROP, SOC_PATCH_DL_SCRPT);
+    ret = property_set(FM_INIT_DL_PROP, "0");
     if(ret != PROP_SET_SUCC) {
         return FM_FAILURE;
     }else {
