@@ -267,6 +267,12 @@ exit:
 close_fd:
     event_listener_canceled = true;
     pthread_join(event_listener_thread, NULL);
+    if (strcmp(value, "rome") != 0) {
+        ret = FmIoctlsInterface::close_fm_patch_dl();
+        if (ret != FM_SUCCESS) {
+            ALOGE("FM patch downloader failed: %d\n", ret);
+        }
+    }
     close(fd_driver);
     fd_driver = -1;
     set_fm_state(FM_OFF);
@@ -278,6 +284,9 @@ close_fd:
 int FmRadioController ::Pwr_Down()
 {
     int ret = 0;
+    char value[PROPERTY_VALUE_MAX] = {'\0'};
+
+    property_get("vendor.bluetooth.soc", value, NULL);
 
     if((cur_fm_state != FM_OFF)) {
         Stop_Scan_Seek();
@@ -289,6 +298,12 @@ int FmRadioController ::Pwr_Down()
         ALOGD("%s, event_listener_thread cancelled\n", __func__);
         event_listener_canceled = true;
         pthread_join(event_listener_thread, NULL);
+    }
+    if (strcmp(value, "rome") != 0) {
+        ret = FmIoctlsInterface::close_fm_patch_dl();
+        if (ret != FM_SUCCESS) {
+            ALOGE("FM patch downloader failed: %d\n", ret);
+        }
     }
     ALOGD("%s, [ret=%d]\n", __func__, ret);
     return ret;

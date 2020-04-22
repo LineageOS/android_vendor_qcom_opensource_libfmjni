@@ -42,15 +42,14 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 int FmIoctlsInterface :: start_fm_patch_dl
 (
-    UINT fd
+    UINT fd __unused
 )
 {
     int ret;
+#ifndef QCOM_NO_FM_FIRMWARE
     int init_success = 0;
     char versionStr[MAX_VER_STR_LEN] = {'\0'};
-#ifndef QCOM_NO_FM_FIRMWARE
     char prop_value[PROPERTY_VALUE_MAX] = {'\0'};
-#endif
     struct v4l2_capability cap;
 
     ALOGI("%s: start_fm_patch_dl = %d\n", __func__, fd);
@@ -73,7 +72,6 @@ int FmIoctlsInterface :: start_fm_patch_dl
             ALOGD("set FM_INIT_PROP done");
             if(ret != PROP_SET_SUCC)
                return FM_FAILURE;
-#ifndef QCOM_NO_FM_FIRMWARE
             ret = property_set(SCRIPT_START_PROP, SOC_PATCH_DL_SCRPT);
             if(ret != PROP_SET_SUCC)
                return FM_FAILURE;
@@ -86,13 +84,6 @@ int FmIoctlsInterface :: start_fm_patch_dl
                     usleep(INIT_WAIT_TIMEOUT);
                 }
             }
-#else
-            ret = property_set(FM_INIT_PROP, "1");
-            usleep(INIT_WAIT_TIMEOUT);
-            if(ret != PROP_SET_SUCC)
-               return FM_FAILURE;
-            init_success = 1;
-#endif
             if(!init_success) {
                 property_set(SCRIPT_STOP_PROP, SOC_PATCH_DL_SCRPT);
                 return FM_FAILURE;
@@ -103,6 +94,14 @@ int FmIoctlsInterface :: start_fm_patch_dl
     }else {
         return FM_FAILURE;
     }
+#else
+    ret = property_set(FM_INIT_PROP, "1");
+    usleep(INIT_WAIT_TIMEOUT);
+    if (ret != PROP_SET_SUCC)
+        return FM_FAILURE;
+    else
+        return FM_SUCCESS;
+#endif
 }
 
 int  FmIoctlsInterface :: close_fm_patch_dl
@@ -110,9 +109,9 @@ int  FmIoctlsInterface :: close_fm_patch_dl
     void
 )
 {
-#ifndef QCOM_NO_FM_FIRMWARE
     int ret;
 
+#ifndef QCOM_NO_FM_FIRMWARE
     ret = property_set(SCRIPT_STOP_PROP, SOC_PATCH_DL_SCRPT);
     if(ret != PROP_SET_SUCC) {
         return FM_FAILURE;
@@ -120,7 +119,11 @@ int  FmIoctlsInterface :: close_fm_patch_dl
         return FM_SUCCESS;
     }
 #else
-    return FM_SUCCESS;
+    ret = property_set(FM_INIT_PROP, "0");
+    if (ret != PROP_SET_SUCC)
+        return FM_FAILURE;
+    else
+        return FM_SUCCESS;
 #endif
 }
 
