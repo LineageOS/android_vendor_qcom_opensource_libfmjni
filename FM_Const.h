@@ -117,7 +117,11 @@ typedef  unsigned long ULINT;
 //STRING LITERALS
 const char *const FM_MODE_PROP = "vendor.hw.fm.mode";
 const char *const FM_VERSION_PROP = "vendor.hw.fm.version";
+#ifndef QCOM_NO_FM_FIRMWARE
 const char *const FM_INIT_PROP = "vendor.hw.fm.init";
+#else
+const char *const FM_INIT_PROP = "hw.fm.init";
+#endif
 const char *const FM_INTERNAL_ANTENNA_PROP = "vendor.hw.fm.internal_antenna";
 const char *const SCRIPT_START_PROP = "ctl.start";
 const char *const SCRIPT_STOP_PROP = "ctl.stop";
