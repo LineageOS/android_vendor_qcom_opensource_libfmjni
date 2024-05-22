@@ -16,6 +16,23 @@
       "message": "looks ok, but this only tightens the race window, still fine I guess \nI\u0027ll check the code to see if we can easily do any better, otherwise will go with that",
       "revId": "65667a0c14f700ddfaa3c8c2764dc33e62cb892f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f962619f_ad990bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2024-05-22T09:23:15Z",
+      "side": 1,
+      "message": "Code itself is pretty bad with multiple instances joining the same thread so we can\u0027t really fix it properly",
+      "revId": "65667a0c14f700ddfaa3c8c2764dc33e62cb892f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
