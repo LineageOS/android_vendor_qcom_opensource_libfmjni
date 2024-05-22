@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2373a77_6f316d2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2024-05-22T07:41:56Z",
+      "side": 1,
+      "message": "looks ok, but this only tightens the race window, still fine I guess \nI\u0027ll check the code to see if we can easily do any better, otherwise will go with that",
+      "revId": "65667a0c14f700ddfaa3c8c2764dc33e62cb892f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
