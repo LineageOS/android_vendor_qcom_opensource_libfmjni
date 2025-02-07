@@ -3,11 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-soong_namespace {
-}
-
 cc_library_shared {
-    name: "libfmjni",
+    name: "libfmjni-qcom",
+    stem: "libfmjni",
 
     defaults: [
         "qcom_libfmjni_defaults",
