@@ -1,18 +1,10 @@
 //
-// SPDX-FileCopyrightText: 2024 The LineageOS Project
+// SPDX-FileCopyrightText: 2024-2025 The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
-soong_namespace {
-}
-
-cc_library_shared {
-    name: "libfmjni",
-
-    defaults: [
-        "qcom_libfmjni_defaults",
-    ],
-
+filegroup {
+    name: "libfmjni-qcom-srcs",
     srcs: [
         "FmIoctlsInterface.cpp",
         "ConfigFmThs.cpp",
@@ -21,16 +13,9 @@ cc_library_shared {
         "FmRadioController.cpp",
         "LibfmJni.cpp",
     ],
+}
 
-    include_dirs: [
-        "frameworks/base/core/jni/include",
-    ],
-
-    shared_libs: [
-        "libcutils",
-        "libdl",
-        "liblog",
-        "libmedia",
-        "libnativehelper",
-    ],
+cc_library_headers {
+    name: "libfmjni-qcom-headers",
+    export_include_dirs: ["."],
 }
