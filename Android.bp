@@ -3,11 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-soong_namespace {
-}
-
 cc_library_shared {
-    name: "libfmjni",
+    name: "libfmjni-qcom",
+    stem: "libfmjni",
 
     cflags: select(soong_config_variable("libfmjni", "no_fm_firmware"), {
         true: ["-DQCOM_NO_FM_FIRMWARE"],
