@@ -1,5 +1,5 @@
 //
-// SPDX-FileCopyrightText: 2024 The LineageOS Project
+// SPDX-FileCopyrightText: 2024-2025 The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -9,9 +9,10 @@ soong_namespace {
 cc_library_shared {
     name: "libfmjni",
 
-    defaults: [
-        "qcom_libfmjni_defaults",
-    ],
+    cflags: select(soong_config_variable("libfmjni", "no_fm_firmware"), {
+        true: ["-DQCOM_NO_FM_FIRMWARE"],
+        default: [],
+    }),
 
     srcs: [
         "FmIoctlsInterface.cpp",
